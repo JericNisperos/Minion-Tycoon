@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  font-family: 'Minecraft', sans-serif;
+
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+
+#button-upgrades-unlocked {
+  @apply inline-block rounded-lg bg-lime-500 text-black px-4 py-2 hover:bg-lime-300 active:bg-lime-100;
+}
+
+#button-sell {
+  @apply inline-block rounded-lg bg-lime-500 text-black px-4 py-2 hover:bg-lime-300 active:bg-lime-100;
+}
+
+#button-upgrades-locked {
+  @apply inline-block rounded-lg px-4 py-2 bg-gray-700 text-white cursor-not-allowed;
+}
+
+#button-prestige-locked {
+  @apply inline-block rounded-lg px-4 py-2 bg-gray-700 text-white cursor-not-allowed !important;
+}
+
+#button-prestige-unlocked {
+  @apply inline-block rounded-lg text-black px-4 py-2 hover:bg-yellow-300 active:bg-yellow-200 bg-yellow-400 !important;
+}
+
+@import url('https://fonts.cdnfonts.com/css/common-pixel');
+@import url('https://fonts.cdnfonts.com/css/minecraft-4');
+
+
+.stone-bg {
+  background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/40c7527d-fc37-4bb5-ba45-0326ad062a9d/d3fsefg-483d3a50-a59b-4abc-b5ba-c8c6feef239b.png/v1/fill/w_1024,h_600,q_80,strp/minecraft_cave_wallpaper_by_griffsnuff_d3fsefg-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjAwIiwicGF0aCI6IlwvZlwvNDBjNzUyN2QtZmMzNy00YmI1LWJhNDUtMDMyNmFkMDYyYTlkXC9kM2ZzZWZnLTQ4M2QzYTUwLWE1OWItNGFiYy1iNWJhLWM4YzZmZWVmMjM5Yi5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.tB1rNr0Gh2b53NcN4uXKeDJAGcZ0V5OD3D4MDtWOmzo');
+  @apply bg-center bg-no-repeat bg-cover !important;
+}

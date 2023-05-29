@@ -137,7 +137,7 @@ export default function Home() {
                       whileHover={{ scale: 1.1 }}
                       id={`${stoneLevel >= stonePrestige * 10 ? "button-prestige-unlocked" : "button-prestige-locked"}`}
                     >
-                      <p>{stoneLevel >= 10 ? "Prestige!" : `Unlocked at Level ${stonePrestige * 10}`}</p>
+                      <p>{stoneLevel >= 10 ? "Prestige!" : `Unlock at Level ${stonePrestige * 10}`}</p>
                     </motion.button>
                   </div>
                 </span>
