@@ -16,6 +16,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
       <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet" />
+      <link href="https://fonts.cdnfonts.com/css/computer-aid" rel="stylesheet" />
+
 
       </head>
       <body>{children}</body>

@@ -7,8 +7,8 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 60, 60, 60;
+  --background-end-rgb: 20, 20, 20;
 
 
 }
@@ -16,14 +16,16 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-start-rgb: 60, 60, 60;
+    --background-end-rgb: 20, 20, 20;
   }
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   font-family: 'Minecraft', sans-serif;
+  /* font-family: 'Computer Aid', bold; */
+
 
   background: linear-gradient(
       to bottom,
@@ -35,7 +37,7 @@ body {
 
 
 #button-upgrades-unlocked {
-  @apply inline-block rounded-lg bg-lime-500 text-black px-4 py-2 hover:bg-lime-300 active:bg-lime-100;
+  @apply inline-block rounded-lg text-black px-4 py-2 hover:bg-lime-300 active:bg-lime-100 bg-gradient-to-b from-emerald-400 via-emerald-500 to-teal-600 border-2 border-teal-700;
 }
 
 #button-sell {
@@ -53,9 +55,6 @@ body {
 #button-prestige-unlocked {
   @apply inline-block rounded-lg text-black px-4 py-2 hover:bg-yellow-300 active:bg-yellow-200 bg-yellow-400 !important;
 }
-
-@import url('https://fonts.cdnfonts.com/css/common-pixel');
-@import url('https://fonts.cdnfonts.com/css/minecraft-4');
 
 
 .stone-bg {
