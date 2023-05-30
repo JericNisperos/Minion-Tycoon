@@ -11,7 +11,7 @@ function MinerMinion(props: GameProps) {
   
   const [farmerPromote, setFarmerPromote] = useState<number>(getLocalStorageItem("farmerPromote", 2));
   
-  const [farmerLocked, setFarmerLocked] = useState<boolean>(getLocalStorageItem("farmerLocked", false));
+  const [farmerLocked, setFarmerLocked] = useState<boolean>(getLocalStorageItem("farmerLocked", true));
   
   const [baseCost, setBaseCost] = useState(10);
   const [exponent, setExponent] = useState(1.5);

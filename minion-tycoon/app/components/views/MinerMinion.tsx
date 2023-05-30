@@ -11,7 +11,7 @@ function MinerMinion(props: GameProps) {
     
     const [minerPromote, setMinerPromote] = useState<number>(getLocalStorageItem("minerPromote", 2));
     
-    const [minerLocked, setMinerLocked] = useState<boolean>(getLocalStorageItem("minerLocked", false));
+    const [minerLocked, setMinerLocked] = useState<boolean>(getLocalStorageItem("minerLocked", true));
     
     const [baseCost, setBaseCost] = useState(10);
     const [exponent, setExponent] = useState(1.5);
@@ -151,14 +151,14 @@ function MinerMinion(props: GameProps) {
                 {/* <motion.button whileHover={{ scale: 1.1 }} id={`${minerLevel >= minerPromote * 10 ? "button-prestige-unlocked" : "button-prestige-locked"}`}>
                 <p>{minerLevel >= minerPromote * 10 ? "Convert" : `Unlock at Level ${minerPromote * 10}`}</p>
               </motion.button> */}
-                {/* <button onClick={resetButton}>Reset</button>
+                <button onClick={resetButton}>Reset</button>
               <button
                 onClick={() => {
                   setMinerCount((prev) => prev + 10000);
                 }}
               >
                 Add 10000
-              </button> */}
+              </button>
               </div>
           </section>
         )}
