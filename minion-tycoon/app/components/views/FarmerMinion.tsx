@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { LoopSpeed, MinionUpgrade } from "../controllers/MinionControllers";
+import { LoopSpeed, MinionUpgrade, getLocalStorageItem, setLocalStorageItem } from "../controllers/MinionControllers";
 import { MinerBlock } from "../controllers/MinerController";
 
 function MinerMinion(props: GameProps) {
   const { coins, setCoins, clickPower, setClickPower } = props;
 
-  const [farmerLevel, setFarmerLevel] = useState<number>(parseInt(localStorage.getItem("farmerLevel") ?? "1"));
-  const [farmerCount, setFarmerCount] = useState<number>(parseInt(localStorage.getItem("farmerCount") ?? "1"));
-
-  const [farmerPromote, setFarmerPromote] = useState<number>(parseInt(localStorage.getItem("farmerPromote") ?? "2"));
-
-  const [farmerLocked, setFarmerLocked] = useState<boolean>(localStorage.getItem("farmerLocked") === "true" || false);
-
+  const [farmerLevel, setFarmerLevel] = useState<number>(getLocalStorageItem("farmerLevel", 1));
+  const [farmerCount, setFarmerCount] = useState<number>(getLocalStorageItem("farmerCount", 1));
+  
+  const [farmerPromote, setFarmerPromote] = useState<number>(getLocalStorageItem("farmerPromote", 2));
+  
+  const [farmerLocked, setFarmerLocked] = useState<boolean>(getLocalStorageItem("farmerLocked", false));
+  
   const [baseCost, setBaseCost] = useState(10);
   const [exponent, setExponent] = useState(1.5);
-
+  
   const [upgradeCost, setUpgradeCost] = useState(10);
-    
-  // console.log(`farmerPromote ${farmerPromote}`)
+  
   useEffect(() => {
-    localStorage.setItem("farmerLevel", farmerLevel.toString());
-    localStorage.setItem("farmerCount", farmerCount.toString());
-    localStorage.setItem("farmerPromote", farmerPromote.toString());
-    localStorage.setItem("farmerLocked", JSON.stringify(farmerLocked));
+    setLocalStorageItem("farmerLevel", farmerLevel);
+    setLocalStorageItem("farmerCount", farmerCount);
+    setLocalStorageItem("farmerPromote", farmerPromote);
+    setLocalStorageItem("farmerLocked", farmerLocked);
     setUpgradeCost(Math.floor(baseCost * Math.pow(farmerLevel, exponent)));
-    // 
-
   }, [farmerLevel, farmerCount, farmerLocked]);
+  
   useEffect(() => {
     if (!farmerLocked) {
       const stoneInterval = setInterval(() => {
@@ -58,7 +56,7 @@ function MinerMinion(props: GameProps) {
   console.log(`${farmerLocked}`)
   return (
     <>
-      <div className="border-4 border-stone-400 min-w-[300px] h-[300px] my-8 rounded-xl stone-bg col-span-1 row-span-3">
+      <div className="border-4 border-stone-400 my-8 rounded-xl stone-bg col-span-1 row-span-3">
         {farmerLocked ? (
           <div className="mx-auto flex items-center justify-center bg-stone-900/75 min-h-full">
             <span className="items-center flex mx-auto justify-center min-h-[200px]">

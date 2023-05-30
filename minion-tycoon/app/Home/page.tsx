@@ -1,32 +1,26 @@
-import { lookup } from "dns";
+"use client"
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import MinerMinion from "../components/views/MinerMinion";
 import FarmerMinion from "../components/views/FarmerMinion";
+import { getLocalStorageItem, setLocalStorageItem } from "../components/controllers/MinionControllers";
 
 export default function Home() {
-  const [coins, setCoins] = useState<number>(parseInt(localStorage.getItem("coins") ?? "0"));
-  const [clickPower, setClickPower] = useState<number>(parseInt(localStorage.getItem("clickPower") ?? "1"));
-  //   function resetButton() {
-  //     localStorage.clear();
-  //     setStoneCount(1);
-  //     setStoneLevel(1);
-  //     window.location.reload();
-  //   }
-
-  useEffect(() => {
-    localStorage.setItem("coins", coins.toString());
-    localStorage.setItem("clickPower", clickPower.toString());
+    const [coins, setCoins] = useState<number>(getLocalStorageItem("coins", 0));
+    const [clickPower, setClickPower] = useState<number>(getLocalStorageItem("clickPower", 1));
     
-  }, [coins, clickPower]);
+    useEffect(() => {
+      setLocalStorageItem("coins", coins);
+      setLocalStorageItem("clickPower", clickPower);
+    }, [coins, clickPower]);
 
   return (
     <main className="min-h-screen mx-8 md:mx-0">
-      <div className="mx-auto justify-center max-w-[1400px] mt-24 flex items-center">
+      <div className="mx-auto justify-center max-w-[1800px] mt-24 flex items-center">
         <h5 className="text-6xl justify-center text-center">Minion Tycoon</h5>
       </div>
 
-      <div className="mx-auto justify-center max-w-[1400px] gap-8 mt-8">
+      <div className="mx-auto justify-center max-w-[1800px] gap-8 mt-8">
         <section id="minions-container" className="">
           {/* <div className="flex mx-auto justify-center items-center ">
             <div className="max-w-[1400px] items-center flex">
@@ -49,7 +43,7 @@ export default function Home() {
             </h5>
             <button onClick={() => {setClickPower(prev => prev * 2)}}>CLick upgrade</button>
           </div> */}
-            <div className="flex overflow-x-auto">
+            <div className="">
 
           <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-3 gap-4 px-8 mx-auto items-center justify-center bg-stone-800 rounded-xl shadow-xl">
 

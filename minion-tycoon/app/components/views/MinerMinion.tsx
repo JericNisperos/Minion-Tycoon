@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { LoopSpeed, MinionUpgrade } from "../controllers/MinionControllers";
+import { LoopSpeed, MinionUpgrade, getLocalStorageItem, setLocalStorageItem } from "../controllers/MinionControllers";
 import { MinerBlock } from "../controllers/MinerController";
 
 function MinerMinion(props: GameProps) {
-  const { coins, setCoins, clickPower, setClickPower } = props;
+    const { coins, setCoins, clickPower, setClickPower } = props;
 
-  const [minerLevel, setMinerLevel] = useState<number>(parseInt(localStorage.getItem("minerLevel") ?? "1"));
-  const [minerCount, setMinerCount] = useState<number>(parseInt(localStorage.getItem("minerCount") ?? "1"));
-
-  const [minerPromote, setMinerPromote] = useState<number>(parseInt(localStorage.getItem("minerPromote") ?? "2"));
-
-  const [minerLocked, setMinerLocked] = useState<boolean>(localStorage.getItem("minerLocked") === "true" || false);
-
-  const [baseCost, setBaseCost] = useState(10);
-  const [exponent, setExponent] = useState(1.5);
-
-  const [upgradeCost, setUpgradeCost] = useState(10);
-
-  // console.log(`minerPromote ${minerPromote}`)
-  useEffect(() => {
-    localStorage.setItem("minerLevel", minerLevel.toString());
-    localStorage.setItem("minerCount", minerCount.toString());
-    localStorage.setItem("minerPromote", minerPromote.toString());
-    localStorage.setItem("minerLocked", JSON.stringify(minerLocked));
-    setUpgradeCost(Math.floor(baseCost * Math.pow(minerLevel, exponent)));
-    //
-  }, [minerLevel, minerCount, minerLocked]);
+    const [minerLevel, setMinerLevel] = useState<number>(getLocalStorageItem("minerLevel", 1));
+    const [minerCount, setMinerCount] = useState<number>(getLocalStorageItem("minerCount", 1));
+    
+    const [minerPromote, setMinerPromote] = useState<number>(getLocalStorageItem("minerPromote", 2));
+    
+    const [minerLocked, setMinerLocked] = useState<boolean>(getLocalStorageItem("minerLocked", false));
+    
+    const [baseCost, setBaseCost] = useState(10);
+    const [exponent, setExponent] = useState(1.5);
+    
+    const [upgradeCost, setUpgradeCost] = useState(10);
+    
+    useEffect(() => {
+      setLocalStorageItem("minerLevel", minerLevel);
+      setLocalStorageItem("minerCount", minerCount);
+      setLocalStorageItem("minerPromote", minerPromote);
+      setLocalStorageItem("minerLocked", minerLocked);
+      setUpgradeCost(Math.floor(baseCost * Math.pow(minerLevel, exponent)));
+    }, [minerLevel, minerCount, minerLocked]);
   useEffect(() => {
     if (!minerLocked) {
       const stoneInterval = setInterval(() => {
@@ -52,12 +50,13 @@ function MinerMinion(props: GameProps) {
     setMinerLocked(true);
     window.location.reload();
   }
+  
   return (
     <>
-      <div className="border-4 border-stone-400 min-w-[300px] my-8 rounded-xl stone-bg col-span-1 row-span-3">
+      <div className="border-4 border-stone-400 my-8 rounded-xl stone-bg col-span-1 row-span-3">
         {minerLocked ? (
           <div className="mx-auto flex items-center justify-center bg-stone-900/75 h-full">
-            <span className="items-center flex mx-auto justify-center min-h-[200px]">
+            <span className="items-center flex mx-auto justify-center">
               <motion.button
                 onClick={() => {
                   setMinerLocked(false);
@@ -74,10 +73,10 @@ function MinerMinion(props: GameProps) {
             </span>
           </div>
         ) : (
-          <span className="mx-auto items-center justify-center min-h-full">
-            <p className="mt-8 mx-4 text-xl">
+          <section className="mx-auto items-center justify-center min-h-full">
+            <span className="mt-8 mx-4 text-xl">
               Miner Minion <span className="text-green-300 text-sm">Lvl {minerLevel}</span>
-            </p>
+            </span>
             <span className="flex mx-auto justify-center items-center mt-8 ">
               <AnimatePresence>
                 <motion.div
@@ -107,10 +106,10 @@ function MinerMinion(props: GameProps) {
               </AnimatePresence>
             </span>
             <span className="flex mx-auto items-center justify-center">
-              <p className="text-5xl text-slate-300">
+              <span className="text-5xl text-slate-300">
                 {minerCount.toLocaleString("en-US")}
                 <span className="text-lg"></span>
-              </p>
+              </span>
             </span>
               <div id="button-container" className="gap-4 m-2 bg-stone-900/50 p-4 rounded-xl">
                 {/* <span>
@@ -161,7 +160,7 @@ function MinerMinion(props: GameProps) {
                 Add 10000
               </button> */}
               </div>
-          </span>
+          </section>
         )}
       </div>
     </>
